@@ -1,52 +1,38 @@
-// import React from 'react'
-
-// function Home() {
-//   return (
-//     <div>
-//          <section className="pt-20 md:pt-40">
-//             <div className="container mx-auto px-8 lg:flex">
-//                 <div className="text-center lg:text-left lg:w-1/2">
-//                     <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-none">Main title of your
-//                         landing page</h1>
-//                     <p className="text-xl lg:text-2xl mt-6 font-light">Free landing page template to promote your
-//                         business startup and generate leads for the offered services
-//                     </p>
-//                     <p className="mt-8 md:mt-12">
-//                         <button type="button"
-//                             className=" py-4 px-12 bg-teal-500 hover:bg-teal-600 rounded text-white">Get Started</button>
-//                     </p>
-//                     <p className="mt-4 text-gray-600">Sed fermentum felis ut cursu
-//                     </p>
-//                 </div>
-
-//                 <div className="lg:w-1/2">
-//                     <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink"
-//                         viewBox="0 0 1167.52 754.06">
-                       
-                   
-//                     </svg>
-//                 </div>
-//             </div>
-//         </section>
-//     </div>
-//   )
-// }
-
-// export default Home
-
-
-
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { set_authentication } from '../redux/authenticationSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const dispatch=useDispatch()
+  const navigate=useNavigate()
+  const authentication_user=useSelector(state=>state.authentication_user)
+
+
+  const logout=()=>{
+    localStorage.clear()
+    dispatch(
+      set_authentication({
+        name:null,
+        isAuthenticated:null,
+        isAdmin:false,
+      })
+    )
+    navigate('login')
+  }
+
+  
   return (
     <body className="bg-gradient-to-br from-gray-900 to-black">
       <div className="text-gray-300 container mx-auto p-8 overflow-hidden md:rounded-lg md:p-10 lg:p-12">
         <div className="flex justify-between">
           <h1 className="font-serif text-3xl font-medium">Home</h1>
-          <span className="self-start px-3 py-2 leading-none text-gray-200 border border-gray-800 rounded-lg focus:outline-none focus:shadow-outline bg-gradient-to-b hover:from-indigo-500 from-gray-900 to-black">
+          <div>
+          <span onClick={()=>logout()} className="self-start px-3 py-2 leading-none text-gray-200 border border-gray-800 rounded-lg focus:outline-none focus:shadow-outline bg-gradient-to-b hover:from-indigo-500 from-gray-900 to-black">
             Logout
           </span>
+          <span>{authentication_user.name}</span>
+          </div>
         </div>
 
         <div className="h-32 md:h-40"></div>
