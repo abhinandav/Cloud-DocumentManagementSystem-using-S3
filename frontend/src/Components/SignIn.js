@@ -48,15 +48,15 @@ const SignIn = () => {
         const password = event.target.password.value
     
         if (!email.trim()) {
-            setEmailError('Email is required')
+            setEmailError('Email is required *')
         }
     
         if (!password.trim()) {
-            setPasswordError('Password is required');
+            setPasswordError('Password is required *');
         }
     
         if (password.length > 0 && password.length < 8) {
-            setPasswordError('Password must be at least 8 characters');
+            setPasswordError('Password must be at least 8 characters *');
         }
     
         const formData = new FormData();
@@ -129,9 +129,11 @@ const SignIn = () => {
                   id="email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
-                  required
+                  
                 />
               </div>
+              {emailError && <span className="text-md text-red-500 mt-1 mb-5">{emailError}</span>}
+
               <div>
                 <label
                   htmlFor="password"
@@ -145,9 +147,17 @@ const SignIn = () => {
                   id="password"
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required
+                  
                 />
               </div>
+              {passwordError ? (<>
+                {passwordError && <span className="text-md text-red-500 " >{passwordError}</span>}
+                </>):(<>
+                {loginError && <span className="text-md text-red-500 " >{loginError}</span>}
+                </>
+              )}
+
+
               <div className="flex items-center justify-between">
                 <div className="flex items-start"></div>
                 <span className="text-sm font-medium text-teal-600 hover:underline dark:text-teal-500">

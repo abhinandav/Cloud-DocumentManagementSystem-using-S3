@@ -19,32 +19,25 @@ function Otp() {
         otp: enteredOtp,
       });
       if (res.status === 200) {
-        console.log('verified');
         navigate('/login');
       } else {
-        console.log('Verification failed');
         setError('Verification failed. Please try again.');
       }
     } catch (error) {
       if (error.response) {
-        // Server responded with a status other than 200 range
-        console.error('Error during OTP verification:', error.response.data);
-        setError(error.response.data || 'Verification failed. Please try again.');
+        const errorMessage = error.response.data.error || 'Verification failed. Please try again.';
+        setError(typeof errorMessage === 'string' ? errorMessage : JSON.stringify(errorMessage));
       } else if (error.request) {
-        // Request was made but no response received
-        console.error('No response received:', error.request);
         setError('No response received from the server. Please try again.');
       } else {
-        // Something else caused the error
-        console.error('Error:', error.message);
         setError('An unexpected error occurred. Please try again.');
       }
     }
   };
 
   return (
-    <div className="flex flex-1 flex-col justify-center space-y-5 max-w-md mx-auto mt-24">
-      <div className="flex flex-col space-y-2 text-center">
+    <div className="flex flex-1 flex-col justify-center space-y-5 max-w-md mx-auto mt-40">
+      <div className="flex flex-col space-y-2 text-center ">
         <h2 className="text-3xl md:text-4xl font-bold">Confirm OTP</h2>
         <p className="text-md md:text-xl">
           Enter the OTP we just sent you.

@@ -65,7 +65,7 @@ const SignUp = () => {
     
     
           if (!cpassword.trim()) {
-            setCPasswordError('Confirm Password is required *');
+            setCPasswordError('Confirm your password*');
             return
           }
     
@@ -138,8 +138,9 @@ const SignUp = () => {
                   name="username"
                   id="name" 
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="xxxxxx" required/>
+                  placeholder="xxxxxx" />
               </div>
+              {usernameError && <span className="text-sm font-bold text-red-500 mt-1 mb-5">{usernameError}</span>}
 
               <div>
                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -148,39 +149,52 @@ const SignUp = () => {
                 <input type="email" name="email"
                   id="email" 
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="name@company.com" required/>
+                  placeholder="name@company.com" />
               </div>
+              {emailError && <span className="text-sm font-bold text-red-500 mt-1 mb-5">{emailError}</span>}
 
 
               <div className="flex flex-row justify-between">
-                <div className="">
-                  <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                  />
+                <div className="flex flex-col">
+                  <span>
+                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="••••••••"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      
+                    />
+                  </span>
+                  <span>
+                    {passwordError && <span className="text-sm font-bold text-red-500 mt-1 mb-5">{passwordError}</span>}
+                  </span>
                 </div>
 
-                <div>
-                  <label htmlFor="cpassword" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >
-                  Confirm Password
-                  </label>
-                  <input
-                    type="password"
-                    name="cpassword"
-                    id="cpassword"
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                  />
+                <div className="flex flex-col">
+                  <span>
+                    <label htmlFor="cpassword" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >
+                    Confirm Password
+                    </label>
+                    <input
+                      type="password"
+                      name="cpassword"
+                      id="cpassword"
+                      placeholder="••••••••"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                    />
+                  </span>
+                  <span>
+                    {cpasswordError && <span className="text-sm font-bold text-red-500 mt-1 mb-5">{cpasswordError}</span>}
+                    {loginError && <span className="text-sm font-bold text-red-500 mt-1 mb-5">{loginError}</span>}
+                  </span>
                 </div>
+                
               </div>
+
               <div className="flex items-center justify-between"></div>
               <button type="submit" className="text-white bg-teal-600 py-1.5 px-4 rounded w-full">
                 SIGN UP
